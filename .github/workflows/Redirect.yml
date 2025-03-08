@@ -12,10 +12,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: "3.13.2"
       - name: Install dependencies
         run: pip install pywikibot
-        run: pip install requests
       - name: Update action
         env:
           BOT_USER: ${{ secrets.BOT_USERNAME }}
