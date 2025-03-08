@@ -1,0 +1,23 @@
+name: 检查共享站文件移动残留重定向
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天UTC时间0点运行
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install pywikibot
+        run: pip install requests
+      - name: Update action
+        env:
+          BOT_USER: ${{ secrets.BOT_USERNAME }}
+          BOT_PASS: ${{ secrets.BOT_PASSWORD }}
+        run: node src/redirect.py
